@@ -1,2 +1,2 @@
 # AdvancedReport
-Comming soon
+Comming soon: Release 28.06.2020
