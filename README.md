@@ -6,12 +6,12 @@ Comming soon: Release 28.06.2020
 ## How to use
 Comming soon
 
-##Features
+## Features
 - report player
 - manage reports
 - send report to discord webhook
 
-##Permissions
+## Permissions
 Permissions | Description | Default
 --------- | ------------------- | ------- | ---------- | -----------
 report.command.add | Allow player to report anyone | true
