@@ -13,7 +13,7 @@ Comming soon
 
 ## Permissions
 Permissions | Description | Default
---------- | ------------------- | ------- | ---------- | -----------
+--------- | ------------------- | ------- 
 report.command.add | Allow player to report anyone | true
 report.command.read | Allow player to read all reports | op
 report.command.delete | Allow player to delete a report | op
