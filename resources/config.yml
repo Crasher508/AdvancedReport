@@ -1,0 +1,15 @@
+# Languages: German (deu), English (eng), French (fr), Custom Messages (custom), Sächsisch (sachs)
+Language: deu
+
+# Reasons why player report anyone
+# (Advertising, Hacking)
+Reasons:
+- Hacking
+- Spamm
+- Werbung
+
+#when you want, that the Reports will send to a discord server, set them to true
+SendToDiscord: false
+
+WebhookName: "AdvancedReport"
+Webhook: ""
