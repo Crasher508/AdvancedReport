@@ -7,6 +7,8 @@ authors:
 - Crasher508
 description: Addon for MyPlot
 load: STARTUP
+depend:
+- FormAPI
 permissions:
   report.command:
     default: op
