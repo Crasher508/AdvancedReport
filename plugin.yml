@@ -5,7 +5,7 @@ version: 1.0.1
 api: [3.0.0, 4.0.0]
 authors:
 - Crasher508
-description: Addon for MyPlot
+description: An Advanced Report System
 load: STARTUP
 depend:
 - FormAPI
