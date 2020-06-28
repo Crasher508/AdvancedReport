@@ -1,15 +1,17 @@
 # AdvancedReport
-Comming soon: Release 28.06.2020
 
 [![Discord](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/FqawGaY)
 
 ## How to use
-Comming soon
+- Download the PHAR [Download](https://poggit.pmmp.io/ci/Crasher508/AdvancedReport)
+- put them in the plugin folder
+- start your server
 
 ## Features
 - report player
 - manage reports
 - send report to discord webhook
+- multi languages
 
 ## Permissions
 Permissions | Description | Default
