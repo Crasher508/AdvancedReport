@@ -68,10 +68,20 @@ class Main extends PluginBase
 	}
 
 	public function onEnable() : void {
+		$this->checkDepends();
 		$this->getServer()->getCommandMap()->register("report", new ReportCommand($this));
 		$this->Banner();
 		$this->getLogger()->info("§4AdvancedReport from Crasher508 was actived - Copyright by Crasher");
 	}
+	
+	public function checkDepends()
+    {
+        $this->formapi = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
+        if (is_null($this->formapi)) {
+            $this->getLogger()->info("§4Please install FormAPI Plugin, disabling plugin...");
+            $this->getPluginLoader()->disablePlugin($this);
+        }
+    }
 
 	private function Banner()
     {

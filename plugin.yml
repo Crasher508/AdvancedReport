@@ -1,12 +1,14 @@
 ---
 name: AdvancedReport
 main: Crasher508\AdvancedReport\Main
-version: 1.0.0
+version: 1.0.1
 api: [3.0.0, 4.0.0]
 authors:
 - Crasher508
 description: Addon for MyPlot
 load: STARTUP
+depend:
+- FormAPI
 permissions:
   report.command:
     default: op
