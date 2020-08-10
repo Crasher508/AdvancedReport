@@ -77,9 +77,9 @@ class Main extends PluginBase
 	public function checkDepends()
     {
         $this->formapi = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        if (is_null($this->formapi)) {
+        if ($this->formapi === null) {
             $this->getLogger()->info("§4Please install FormAPI Plugin, disabling plugin...");
-            $this->getPluginLoader()->disablePlugin($this);
+            $this->setEnabled(false);
         }
     }
 
