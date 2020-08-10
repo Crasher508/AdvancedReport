@@ -22,4 +22,3 @@ report.command.delete | Allow player to delete a report | op
 
 ## ToDo
 - MySQL Dataprovider
-- Custom Languages
