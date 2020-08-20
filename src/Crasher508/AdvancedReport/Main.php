@@ -68,43 +68,18 @@ class Main extends PluginBase
 	}
 
 	public function onEnable() : void {
-		$this->checkDepends();
 		$this->getServer()->getCommandMap()->register("report", new ReportCommand($this));
-		$this->Banner();
 		$this->getLogger()->info("§4AdvancedReport from Crasher508 was actived - Copyright by Crasher");
 	}
-	
-	public function checkDepends()
-    {
-        $this->formapi = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        if ($this->formapi === null) {
-            $this->getLogger()->info("§4Please install FormAPI Plugin, disabling plugin...");
-            $this->setEnabled(false);
-        }
-    }
 
-	private function Banner()
-    {
-        $banner = strval(
-            "\n" .
-                "╔═══╗╔═══╗╔═══╗╔═══╗╔╗═╔╗╔═══╗╔═══╗\n" .
-                "║╔══╝║╔═╗║║╔═╗║║╔══╝║║═║║║╔══╝║╔═╗║\n" .
-                "║║═══║╚═╝║║╚═╝║║╚══╗║╚═╝║║╚══╗║╚═╝║\n" .
-                "║║═══║╔╗╔╝║╔═╗║╚══╗║║╔═╗║║╔══╝║╔╗╔╝\n" .
-                "║╚══╗║║║╚╗║║═║║╔══╝║║║═║║║╚══╗║║║╚╗\n" .
-                "╚═══╝╚╝╚═╝╚╝═╚╝╚═══╝╚╝═╚╝╚═══╝╚╝╚═╝"
-        );
-        $this->getLogger()->info($banner);
-	}
-
-	/**
+     /**
      * @param string $str
      * @param string[] $params
      *
      * @param string $onlyPrefix
      * @return string
      */
-	public function translateString(string $str, array $params = [], string $onlyPrefix = null) : string {
+    public function translateString(string $str, array $params = [], string $onlyPrefix = null) : string {
         return $this->getLanguage()->translateString($str, $params, $onlyPrefix);
     }
 
