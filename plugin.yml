@@ -2,13 +2,9 @@
 name: AdvancedReport
 main: Crasher508\AdvancedReport\Main
 version: 1.0.1
-api: [3.0.0, 4.0.0]
-authors:
-- Crasher508
+api: 3.0.0
+author: Crasher508
 description: An Advanced Report System
-load: STARTUP
-depend:
-- FormAPI
 permissions:
   report.command:
     default: op
