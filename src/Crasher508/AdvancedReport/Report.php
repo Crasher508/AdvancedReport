@@ -8,7 +8,7 @@ class Report
 	public $reason = "", $reporter = "", $player = "", $info = "", $date = "";
 
 	/**
-	 * Plot constructor.
+	 * Report constructor.
 	 *
 	 * @param string $reason
 	 * @param string $reporter
