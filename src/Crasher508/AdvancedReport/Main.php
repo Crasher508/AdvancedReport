@@ -69,7 +69,6 @@ class Main extends PluginBase
 
 	public function onEnable() : void {
 		$this->getServer()->getCommandMap()->register("report", new ReportCommand($this));
-		$this->getLogger()->info("§4AdvancedReport from Crasher508 was actived - Copyright by Crasher");
 	}
 
      /**
