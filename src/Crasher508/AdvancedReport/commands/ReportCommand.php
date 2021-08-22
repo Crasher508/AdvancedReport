@@ -2,18 +2,16 @@
 
 namespace Crasher508\AdvancedReport\commands;
 
-use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
-use pocketmine\Server;
-use pocketmine\utils\Config;
 use Crasher508\AdvancedReport\Main;
-use pocketmine\utils\TextFormat;
 use Crasher508\AdvancedReport\forms\SimpleReportForm;
 use Crasher508\AdvancedReport\forms\AdminReportForm;
 
 class ReportCommand extends PluginCommand
 {
+
+    private Main $plugin;
 
     public function __construct(Main $plugin)
     {
@@ -25,7 +23,7 @@ class ReportCommand extends PluginCommand
         $this->plugin = $plugin;
     }
 
-    public function execute(CommandSender $sender, string $commandLabel, array $args)
+    public function execute(CommandSender $sender, string $commandLabel, array $args) : bool
     {
         if(!$sender->hasPermission("report.command.add")){
             $sender->sendMessage($this->plugin->prefix . $this->plugin->translateString("noperm"));

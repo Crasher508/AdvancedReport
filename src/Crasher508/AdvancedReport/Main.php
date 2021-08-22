@@ -2,33 +2,21 @@
 declare(strict_types=1);
 namespace Crasher508\AdvancedReport;
 
-use MyPlot\MyPlot;
+use CortexPE\DiscordWebhookAPI\Message;
+use CortexPE\DiscordWebhookAPI\Webhook;
 use Crasher508\AdvancedReport\provider\DataProvider;
-use Crasher508\AdvancedReport\provider\MySQLProvider;
 use Crasher508\AdvancedReport\provider\SQLiteDataProvider;
 use Crasher508\AdvancedReport\commands\ReportCommand;
 use pocketmine\lang\BaseLang;
-use pocketmine\level\Level;
-use pocketmine\level\Position;
-use pocketmine\math\Vector3;
-use pocketmine\Player;
-use pocketmine\Server;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\Config;
-use pocketmine\utils\TextFormat as TF;
 
 class Main extends PluginBase
 {
-	/** @var Main $instance */
-	private static $instance;
-	/** @var DataProvider $dataProvider */
-	private $dataProvider = null;
-	/** @var BaseLang $baseLang */
-	private $baseLang = null;
+	private static Main $instance;
+	private ?DataProvider $dataProvider = null;
+	private ?BaseLang $baseLang = null;
 
-	public $prefix = "§l§aAdvancedReport §d> §r";
-
-	public $players = [];
+	public string $prefix = "§l§aAdvancedReport §d> §r";
 
 	/**
 	 * @return Main
@@ -82,27 +70,12 @@ class Main extends PluginBase
         return $this->getLanguage()->translateString($str, $params, $onlyPrefix);
     }
 
-	/**
-     * @param $message
-     */
-    // Heavy thanks to NiekertDev !
-
-    public function sendMessage(string $player = "nolog", string $msg){
-        $name = $this->getConfig()->get("WebhookName");
-        $webhook = $this->getConfig()->get("Webhook");
-        $curlopts = [
-	    	"content" => $msg,
-            "username" => $name
-        ];
-		
-		$curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $webhook);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($curlopts));
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_exec($curl);
-		return;
+	public function sendMessage(string $msg){
+        $webhook = new Webhook($this->getConfig()->get("Webhook"));
+        $message = new Message();
+        $message->setUsername($this->getConfig()->get("WebhookName", "AdvancedReport"));
+        $message->setContent($msg);
+        $webhook->send($message);
     }
 
 	public function onDisable() : void {

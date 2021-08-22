@@ -17,28 +17,27 @@ class AdminReportForm extends SimpleForm {
             if($data === null)
                 return;
 
-                switch ($data) {
-                    case 0:
+            switch ($data) {
+                case 0:
                     break;
-                    case 1:
-                        $form = new SimpleReportForm();
-                        $player->sendForm($form);
+                case 1:
+                    $form = new SimpleReportForm();
+                    $player->sendForm($form);
                     break;
-                    case 2:
-                        if($player->hasPermission("report.command.read")){
-                            $reports = Main::getInstance()->getProvider()->getAllReports();
-                            if(count($reports) > 0){
-                                $form = new ReadListReportForm();
-                                $player->sendForm($form); 
-                            }else{
-                                $player->sendMessage(Main::getInstance()->prefix . Main::getInstance()->translateString("noreports"));
-                            }
+                case 2:
+                    if($player->hasPermission("report.command.read")){
+                        $reports = Main::getInstance()->getProvider()->getAllReports();
+                        if(count($reports) > 0){
+                            $form = new ReadListReportForm();
+                            $player->sendForm($form);
                         }else{
-                            $player->sendMessage(Main::getInstance()->prefix . Main::getInstance()->translateString("noperm"));
+                            $player->sendMessage(Main::getInstance()->prefix . Main::getInstance()->translateString("noreports"));
                         }
+                    }else{
+                        $player->sendMessage(Main::getInstance()->prefix . Main::getInstance()->translateString("noperm"));
+                    }
                     break;
-                }
-
+            }
         };
 
         parent::__construct($callable);

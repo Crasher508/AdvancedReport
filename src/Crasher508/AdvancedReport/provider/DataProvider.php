@@ -4,7 +4,6 @@ namespace Crasher508\AdvancedReport\provider;
 
 use Crasher508\AdvancedReport\Report;
 use Crasher508\AdvancedReport\Main;
-use pocketmine\Player;
 
 abstract class DataProvider
 {

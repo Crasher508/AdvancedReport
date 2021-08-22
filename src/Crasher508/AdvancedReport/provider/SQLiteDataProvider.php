@@ -4,14 +4,13 @@ namespace Crasher508\AdvancedReport\provider;
 
 use Crasher508\AdvancedReport\Main;
 use Crasher508\AdvancedReport\Report;
-use pocketmine\Player;
+use SQLite3;
+use SQLite3Stmt;
 
 class SQLiteDataProvider extends DataProvider
 {
-	/** @var \SQLite3 $db */
-	private $db;
-	/** @var \SQLite3Stmt */
-	private $sqlAddReport, $sqlRemoveReport, $sqlGetReport, $sqlGetAllReports;
+	private SQLite3 $db;
+	private SQLite3Stmt $sqlAddReport, $sqlRemoveReport, $sqlGetReport, $sqlGetAllReports;
 
 	/**
 	 * SQLiteDataProvider constructor.
@@ -20,7 +19,7 @@ class SQLiteDataProvider extends DataProvider
 	 */
 	public function __construct(Main $plugin) {
 		parent::__construct($plugin);
-		$this->db = new \SQLite3($this->plugin->getDataFolder() . "reports.db");
+		$this->db = new SQLite3($this->plugin->getDataFolder() . "reports.db");
 		$this->db->exec("CREATE TABLE IF NOT EXISTS reports
 			(reason TEXT, reporter TEXT, player TEXT, info TEXT, date TEXT);");
 		$this->sqlAddReport = $this->db->prepare("INSERT OR REPLACE INTO reports (reason, reporter, player, info, date) VALUES (:reason, :reporter, :player, :info, :date);");

@@ -11,24 +11,18 @@ class ReadListReportForm extends SimpleForm {
 
     public function __construct() {
 
-        $callable = function (Player $player, $data) {
-
-            if ($data === null) {
-
-
-
-            } else {
-
-                $report = Main::getInstance()->getProvider()->getAllReports()[$data];
-
-                $form = new ReadReportForm($report);
-                $player->sendForm($form);
-
-            }
-
-        };
-
         $reports = Main::getInstance()->getProvider()->getAllReports();
+
+        $callable = function (Player $player, $data) use ($reports) {
+
+            if ($data === null)
+                return;
+
+            $report = $reports[$data];
+
+            $form = new ReadReportForm($report);
+            $player->sendForm($form);
+        };
 
         parent::__construct($callable);
 

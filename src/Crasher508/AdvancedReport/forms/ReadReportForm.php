@@ -13,21 +13,15 @@ class ReadReportForm extends SimpleForm {
 
         $callable = function (Player $player, $data) use ($report){
 
-            if ($data === null) {
+            if ($data === null)
+                return;
 
-
-
-            } else {
-
-                if($player->hasPermission("report.command.delete")){
-                    Main::getInstance()->getProvider()->removeReport($report);
-                    $player->sendMessage(Main::getInstance()->prefix . Main::getInstance()->translateString("readreport.successdelete", [$report->player, $report->reason]));
-                }else{
-                    $player->sendMessage(Main::getInstance()->prefix . Main::getInstance()->translateString("noperm"));
-                }
-
+            if($player->hasPermission("report.command.delete")){
+                Main::getInstance()->getProvider()->removeReport($report);
+                $player->sendMessage(Main::getInstance()->prefix . Main::getInstance()->translateString("readreport.successdelete", [$report->player, $report->reason]));
+            }else{
+                $player->sendMessage(Main::getInstance()->prefix . Main::getInstance()->translateString("noperm"));
             }
-
         };
 
         parent::__construct($callable);

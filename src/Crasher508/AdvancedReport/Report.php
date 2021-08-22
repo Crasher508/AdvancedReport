@@ -5,7 +5,7 @@ namespace Crasher508\AdvancedReport;
 class Report
 {
 
-	public $reason = "", $reporter = "", $player = "", $info = "", $date = "";
+	public string $reason = "", $reporter = "", $player = "", $info = "", $date = "";
 
 	/**
 	 * Report constructor.
