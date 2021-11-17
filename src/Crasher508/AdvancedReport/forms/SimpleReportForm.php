@@ -5,8 +5,8 @@ namespace Crasher508\AdvancedReport\forms;
 use Crasher508\AdvancedReport\Main;
 use Crasher508\AdvancedReport\Report;
 use jojoe77777\FormAPI\CustomForm;
-use pocketmine\Player;
 use DateTime;
+use pocketmine\player\Player;
 
 class SimpleReportForm extends CustomForm {
 

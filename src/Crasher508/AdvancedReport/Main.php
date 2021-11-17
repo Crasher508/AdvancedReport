@@ -7,14 +7,14 @@ use CortexPE\DiscordWebhookAPI\Webhook;
 use Crasher508\AdvancedReport\provider\DataProvider;
 use Crasher508\AdvancedReport\provider\SQLiteDataProvider;
 use Crasher508\AdvancedReport\commands\ReportCommand;
-use pocketmine\lang\BaseLang;
+use pocketmine\lang\Language;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase
 {
 	private static Main $instance;
 	private ?DataProvider $dataProvider = null;
-	private ?BaseLang $baseLang = null;
+	private ?Language $baseLang = null;
 
 	public string $prefix = "§l§aAdvancedReport §d> §r";
 
@@ -30,9 +30,9 @@ class Main extends PluginBase
 	 *
 	 * @api
 	 *
-	 * @return BaseLang
+	 * @return Language
 	 */
-	public function getLanguage() : BaseLang {
+	public function getLanguage() : Language {
 		return $this->baseLang;
 	}
 
@@ -50,8 +50,8 @@ class Main extends PluginBase
 	public function onLoad() : void {
 		self::$instance = $this;
 		$this->reloadConfig();
-		$lang = $this->getConfig()->get("Language", BaseLang::FALLBACK_LANGUAGE);
-		$this->baseLang = new BaseLang($lang, $this->getFile() . "resources/");
+		$lang = $this->getConfig()->get("Language", Language::FALLBACK_LANGUAGE);
+		$this->baseLang = new Language($lang, $this->getFile() . "resources/");
 		$this->dataProvider = new SQLiteDataProvider($this);
 	}
 

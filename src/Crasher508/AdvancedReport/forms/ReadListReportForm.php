@@ -3,9 +3,8 @@
 namespace Crasher508\AdvancedReport\forms;
 
 use Crasher508\AdvancedReport\Main;
-use Crasher508\AdvancedReport\forms\ReadReportForm;
 use jojoe77777\FormAPI\SimpleForm;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class ReadListReportForm extends SimpleForm {
 
