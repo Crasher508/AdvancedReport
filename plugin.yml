@@ -1,18 +1,17 @@
 ---
 name: AdvancedReport
 main: Crasher508\AdvancedReport\Main
-version: 1.0.1
-api: 3.0.0
+version: 1.0.2
+api: 4.0.0
 author: Crasher508
 description: An Advanced Report System
 permissions:
   report.command:
     default: op
-    children:
-      report.command.add:
-        default: true
-      report.command.read:
-        default: op
-      report.command.delete:
-        default: op
+  report.command.add:
+    default: true
+  report.command.read:
+    default: op
+  report.command.delete:
+    default: op
 ...

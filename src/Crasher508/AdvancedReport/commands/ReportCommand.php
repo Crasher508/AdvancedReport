@@ -2,20 +2,20 @@
 
 namespace Crasher508\AdvancedReport\commands;
 
+use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginCommand;
 use Crasher508\AdvancedReport\Main;
 use Crasher508\AdvancedReport\forms\SimpleReportForm;
 use Crasher508\AdvancedReport\forms\AdminReportForm;
 
-class ReportCommand extends PluginCommand
+class ReportCommand extends Command
 {
 
     private Main $plugin;
 
     public function __construct(Main $plugin)
     {
-        parent::__construct("report", $plugin);
+        parent::__construct("report");
         $this->setPermission("report.command.add");
 		$this->setAliases([]);
 		$this->setDescription("Melde einen Spieler");

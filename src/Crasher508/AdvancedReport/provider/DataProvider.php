@@ -7,8 +7,7 @@ use Crasher508\AdvancedReport\Main;
 
 abstract class DataProvider
 {
-	/** @var Main $plugin */
-	protected $plugin;
+	protected Main $plugin;
 
 	/**
 	 * DataProvider constructor.
