@@ -19,7 +19,17 @@ class AdminReportForm extends SimpleForm {
                 case 0:
                     break;
                 case 1:
-                    $form = new SimpleReportForm();
+					$players = [];
+					foreach(Main::getInstance()->getServer()->getOnlinePlayers() as $online){
+						if((($add = $online->getName()) !== $player->getName()) and !$online->hasPermission("report.bypass")) {
+							$players[] = $add;
+						}
+					}
+					if(count($players) < 1) {
+						$player->sendMessage(Main::getInstance()->prefix . Main::getInstance()->translateString("addreport.noplayers"));
+						return;
+					}
+                    $form = new SimpleReportForm($players);
                     $player->sendForm($form);
                     break;
                 case 2:

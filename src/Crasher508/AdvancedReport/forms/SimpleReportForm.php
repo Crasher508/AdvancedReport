@@ -10,14 +10,8 @@ use pocketmine\player\Player;
 
 class SimpleReportForm extends CustomForm {
 
-    public function __construct() {
-
-        $players = [];
-        foreach(Main::getInstance()->getServer()->getOnlinePlayers() as $online){
-            $players[] = $online->getName();
-        }
-
-        $callable = function (Player $player, $data) use ($players) {
+    public function __construct(array $players) {
+    	$callable = function (Player $player, $data) use ($players) {
 
             if ($data === null)
                 return;
