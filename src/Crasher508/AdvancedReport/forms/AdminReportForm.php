@@ -9,9 +9,7 @@ use pocketmine\player\Player;
 class AdminReportForm extends SimpleForm {
 
     public function __construct() {
-
         $callable = function (Player $player, $data) {
-
             if($data === null)
                 return;
 
@@ -47,19 +45,11 @@ class AdminReportForm extends SimpleForm {
                     break;
             }
         };
-
         parent::__construct($callable);
-
         $this->setTitle("§l§aAdvancedReport Dashboard");
-
         $this->setContent(Main::getInstance()->translateString("adminreport.content"));
-
         $this->addButton(Main::getInstance()->translateString("adminreport.close"));
-
         $this->addButton(Main::getInstance()->translateString("adminreport.create"));
-
         $this->addButton(Main::getInstance()->translateString("adminreport.manage"));
-
     }
-
 }

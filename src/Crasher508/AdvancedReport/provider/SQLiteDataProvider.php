@@ -14,19 +14,16 @@ class SQLiteDataProvider extends DataProvider
 
 	/**
 	 * SQLiteDataProvider constructor.
-	 *
-	 * @param Main $plugin
 	 */
-	public function __construct(Main $plugin) {
-		parent::__construct($plugin);
-		$this->db = new SQLite3($this->plugin->getDataFolder() . "reports.db");
+	public function __construct() {
+		$this->db = new SQLite3(Main::getInstance()->getDataFolder() . "reports.db");
 		$this->db->exec("CREATE TABLE IF NOT EXISTS reports
 			(reason TEXT, reporter TEXT, player TEXT, info TEXT, date TEXT);");
 		$this->sqlAddReport = $this->db->prepare("INSERT OR REPLACE INTO reports (reason, reporter, player, info, date) VALUES (:reason, :reporter, :player, :info, :date);");
 		$this->sqlRemoveReport = $this->db->prepare("DELETE FROM reports WHERE reporter = :reporter AND player = :player;");
 		$this->sqlGetReport = $this->db->prepare("SELECT reason, reporter, player, info, date FROM reports WHERE reporter = :reporter AND player = :player;");
 		$this->sqlGetAllReports = $this->db->prepare("SELECT reason, reporter, player, info, date FROM reports;");
-		$this->plugin->getLogger()->debug("SQLite data provider registered");
+		Main::getInstance()->getLogger()->debug("SQLite data provider registered");
 	}
 
 	/**
@@ -101,6 +98,6 @@ class SQLiteDataProvider extends DataProvider
 
 	public function close() : void {
 		$this->db->close();
-		$this->plugin->getLogger()->debug("SQLite database closed!");
+		Main::getInstance()->getLogger()->debug("SQLite database closed!");
 	}
 }

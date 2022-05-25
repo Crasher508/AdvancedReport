@@ -12,33 +12,27 @@ use pocketmine\player\Player;
 class ReportCommand extends Command
 {
 
-    private Main $plugin;
-
-    public function __construct(Main $plugin)
+    public function __construct()
     {
-        parent::__construct("report");
+        parent::__construct("report", "Melde einen Spieler", "/report");
         $this->setPermission("report.command.add");
-		$this->setAliases([]);
-		$this->setDescription("Melde einen Spieler");
-		$this->setUsage("/report");
-        $this->plugin = $plugin;
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) : bool
     {
+		$plugin = Main::getInstance();
     	if(!($sender instanceof Player)) {
-			$sender->sendMessage($this->plugin->prefix . $this->plugin->translateString("noconsole"));
+			$sender->sendMessage($plugin->prefix . $plugin->translateString("noconsole"));
 			return false;
 		}
         if(!$sender->hasPermission("report.command.add")){
-            $sender->sendMessage($this->plugin->prefix . $this->plugin->translateString("noperm"));
+            $sender->sendMessage($plugin->prefix . $plugin->translateString("noperm"));
             return false;
         }
         if(empty($args[0])){
-            if($sender->hasPermission("report.command.read")){
+            if ($sender->hasPermission("report.command.read")) {
                 $form = new AdminReportForm();
-                $sender->sendForm($form);
-            }else{
+			} else {
 				$players = [];
 				foreach(Main::getInstance()->getServer()->getOnlinePlayers() as $online){
 					if((($add = $online->getName()) !== $sender->getName()) and !$online->hasPermission("report.bypass")) {
@@ -46,13 +40,13 @@ class ReportCommand extends Command
 					}
 				}
 				if(count($players) < 1) {
-					$sender->sendMessage($this->plugin->prefix . $this->plugin->translateString("addreport.noplayers"));
+					$sender->sendMessage($plugin->prefix . $plugin->translateString("addreport.noplayers"));
 					return false;
 				}
                 $form = new SimpleReportForm($players);
-                $sender->sendForm($form);
-            }
-            return false;
+			}
+			$sender->sendForm($form);
+			return false;
         }
         return true;
     }

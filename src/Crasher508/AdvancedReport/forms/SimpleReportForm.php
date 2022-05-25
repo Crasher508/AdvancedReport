@@ -12,7 +12,6 @@ class SimpleReportForm extends CustomForm {
 
     public function __construct(array $players) {
     	$callable = function (Player $player, $data) use ($players) {
-
             if ($data === null)
                 return;
 
@@ -38,17 +37,10 @@ class SimpleReportForm extends CustomForm {
                 $player->sendMessage(Main::getInstance()->prefix . Main::getInstance()->translateString("addreport.emptyinput"));
             }
         };
-
         parent::__construct($callable);
-
         $this->setTitle("§l§aAdvancedReport");
-
         $this->addDropdown(Main::getInstance()->translateString("addreport.formchoose"), $players);
-
         $this->addDropdown(Main::getInstance()->translateString("addreport.formreason"), Main::getInstance()->getConfig()->get("Reasons", ["Spam"]));
-
         $this->addInput(Main::getInstance()->translateString("addreport.forminfo"));
-
     }
-
 }

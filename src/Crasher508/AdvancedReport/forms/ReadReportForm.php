@@ -10,9 +10,7 @@ use pocketmine\player\Player;
 class ReadReportForm extends SimpleForm {
 
     public function __construct(Report $report) {
-
         $callable = function (Player $player, $data) use ($report){
-
             if ($data === null)
                 return;
 
@@ -23,14 +21,9 @@ class ReadReportForm extends SimpleForm {
                 $player->sendMessage(Main::getInstance()->prefix . Main::getInstance()->translateString("noperm"));
             }
         };
-
         parent::__construct($callable);
-
         $this->setTitle("§l§aAdvancedReport Dashboard");
-
         $this->setContent(Main::getInstance()->translateString("readreport.content", [$report->player, $report->reason, $report->reporter, $report->date, $report->info]));
         $this->addButton(Main::getInstance()->translateString("readreport.delte"));
-
     }
-
 }

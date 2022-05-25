@@ -7,16 +7,6 @@ use Crasher508\AdvancedReport\Main;
 
 abstract class DataProvider
 {
-	protected Main $plugin;
-
-	/**
-	 * DataProvider constructor.
-	 *
-	 * @param Main $plugin
-	 */
-	public function __construct(Main $plugin) {
-		$this->plugin = $plugin;
-	}
 
 	/**
 	 * @param Report $report
@@ -41,10 +31,12 @@ abstract class DataProvider
 	public abstract function getReport(string $reporter, string $player) : ?Report;
 
 	/**
-	 *
 	 * @return Report[]
 	 */
 	public abstract function getAllReports() : array;
 
+	/**
+	 * @return void
+	 */
 	public abstract function close() : void;
 }

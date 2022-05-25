@@ -18,31 +18,14 @@ class Main extends PluginBase
 
 	public string $prefix = "§l§aAdvancedReport §d> §r";
 
-	/**
-	 * @return Main
-	 */
-	public static function getInstance() : self {
+	public static function getInstance() : Main {
 		return self::$instance;
 	}
 
-	/**
-	 * Returns the Multi-lang management class
-	 *
-	 * @api
-	 *
-	 * @return Language
-	 */
 	public function getLanguage() : Language {
 		return $this->baseLang;
 	}
 
-	/**
-	 * Returns the DataProvider that is being used
-	 *
-	 * @api
-	 *
-	 * @return DataProvider
-	 */
 	public function getProvider() : DataProvider {
 		return $this->dataProvider;
 	}
@@ -52,26 +35,34 @@ class Main extends PluginBase
 		$this->reloadConfig();
 		$lang = $this->getConfig()->get("Language", Language::FALLBACK_LANGUAGE);
 		$this->baseLang = new Language($lang, $this->getFile() . "resources/");
-		$this->dataProvider = new SQLiteDataProvider($this);
+		$this->dataProvider = new SQLiteDataProvider();
 	}
 
 	public function onEnable() : void {
-		$this->getServer()->getCommandMap()->register("report", new ReportCommand($this));
+		$this->getServer()->getCommandMap()->register("report", new ReportCommand());
 	}
 
-     /**
-     * @param string $str
-     * @param string[] $params
-     *
-     * @param string $onlyPrefix
-     * @return string
-     */
-    public function translateString(string $str, array $params = [], string $onlyPrefix = null) : string {
+	/**
+	 * @param string      $str
+	 * @param array       $params
+	 * @param string|null $onlyPrefix
+	 *
+	 * @return string
+	 */
+	public function translateString(string $str, array $params = [], string $onlyPrefix = null) : string {
         return $this->getLanguage()->translateString($str, $params, $onlyPrefix);
     }
 
-	public function sendMessage(string $msg){
-        $webhook = new Webhook($this->getConfig()->get("Webhook"));
+	/**
+	 * @param string $msg
+	 *
+	 * @return void
+	 */
+	public function sendMessage(string $msg) : void {
+		if (!($url = $this->getConfig()->get("Webhook")))
+			return;
+
+        $webhook = new Webhook($url);
         $message = new Message();
         $message->setUsername($this->getConfig()->get("WebhookName", "AdvancedReport"));
         $message->setContent($msg);
@@ -79,7 +70,6 @@ class Main extends PluginBase
     }
 
 	public function onDisable() : void {
-		if($this->dataProvider !== null)
-			$this->dataProvider->close();
+		$this->dataProvider?->close();
 	}
 }
