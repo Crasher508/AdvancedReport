@@ -3,25 +3,27 @@
 namespace Crasher508\AdvancedReport\forms;
 
 use Crasher508\AdvancedReport\Main;
-use jojoe77777\FormAPI\SimpleForm;
+use dktapps\pmforms\MenuForm;
+use dktapps\pmforms\MenuOption;
 use pocketmine\player\Player;
 
-class ReadListReportForm extends SimpleForm {
+class ReadListReportForm extends MenuForm {
 
     public function __construct() {
         $reports = Main::getInstance()->getProvider()->getAllReports();
-        $callable = function (Player $player, $data) use ($reports) {
-            if ($data === null)
-                return;
-
-            $report = $reports[$data];
-            $form = new ReadReportForm($report);
-            $player->sendForm($form);
-        };
-        parent::__construct($callable);
-        $this->setTitle("§l§aAdvancedReport Dashboard");
-        foreach($reports as $report){
-            $this->addButton("§c" . $report->player . " - " . $report->reason);
-        }
+		$buttons = [];
+		foreach ($reports as $report) {
+			$buttons[] = new MenuOption("§c" . $report->player . " - " . $report->reason);
+		}
+        parent::__construct(
+			"§l§aAdvancedReport Dashboard",
+			"",
+			$buttons,
+			function (Player $player, int $selected) use ($reports) : void {
+				$report = $reports[$selected];
+				$form = new ReadReportForm($report);
+				$player->sendForm($form);
+			}
+		);
     }
 }
