@@ -8,6 +8,16 @@ Reasons:
 - Spamm
 - Werbung
 
+# choose mysql or sqlite
+provider: mysql
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  username: ""
+  password: ""
+  database: ""
+  table: ""
+
 # when you want, that the reports will send to a discord server, set them to true
 SendToDiscord: false
 # name of Discord webhook

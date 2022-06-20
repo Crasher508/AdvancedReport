@@ -5,6 +5,7 @@ namespace Crasher508\AdvancedReport;
 use CortexPE\DiscordWebhookAPI\Message;
 use CortexPE\DiscordWebhookAPI\Webhook;
 use Crasher508\AdvancedReport\provider\DataProvider;
+use Crasher508\AdvancedReport\provider\MySQLProvider;
 use Crasher508\AdvancedReport\provider\SQLiteDataProvider;
 use Crasher508\AdvancedReport\commands\ReportCommand;
 use pocketmine\lang\Language;
@@ -35,7 +36,10 @@ class Main extends PluginBase
 		$this->reloadConfig();
 		$lang = $this->getConfig()->get("Language", Language::FALLBACK_LANGUAGE);
 		$this->baseLang = new Language($lang, $this->getFile() . "resources/");
-		$this->dataProvider = new SQLiteDataProvider();
+		$this->dataProvider = match ($this->getConfig()->get("provider", "sqlite")) {
+			"mysql" => new MySQLProvider(),
+			default => new SQLiteDataProvider()
+		};
 	}
 
 	public function onEnable() : void {
