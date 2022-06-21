@@ -8,8 +8,8 @@ Reasons:
 - Spamm
 - Werbung
 
-# choose mysql or sqlite
-provider: mysql
+# choose sqlite or mysql
+provider: sqlite
 mysql:
   host: "127.0.0.1"
   port: 3306

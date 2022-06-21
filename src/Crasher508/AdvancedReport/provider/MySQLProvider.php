@@ -40,7 +40,7 @@ class MySQLProvider extends DataProvider
 		if (!$this->reconnect())
 			return false;
 
-		$stmt = $this->db->prepare("INSERT OR REPLACE INTO " . $this->tableName . " (reason, reporter, player, info, date) VALUES (?, ?, ?, ?, ?);");
+		$stmt = $this->db->prepare("INSERT INTO `" . $this->tableName . "` (reason, reporter, player, info, date) VALUES (?, ?, ?, ?, ?);");
 		$stmt->bind_param("sssss", $report->reason, $report->reporter, $report->player, $report->info, $report->date);
 		$result = $stmt->execute();
 		if($result === false)
