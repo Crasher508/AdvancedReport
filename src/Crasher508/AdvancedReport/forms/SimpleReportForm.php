@@ -27,9 +27,9 @@ class SimpleReportForm extends CustomForm {
 					"problem", Main::getInstance()->translateString("addreport.forminfo"),
 				)
 			],
-			function (Player $player, CustomFormResponse $response) : void {
-				$reportet = $response->getString("player");
-				$reason = $response->getString("reason");
+			function (Player $player, CustomFormResponse $response) use ($players) : void {
+				$reportet = $players[$response->getInt("player")];
+				$reason = Main::getInstance()->getConfig()->get("Reasons", ["Spam"])[$response->getInt("reason")];
 				$info = $response->getString("problem");
 				if ($info !== "") {
 					if (Main::getInstance()->getProvider()->getReport($player->getName(), $reportet) === null) {
