@@ -34,12 +34,12 @@ class Main extends PluginBase
 	public function onLoad() : void {
 		self::$instance = $this;
 		$this->reloadConfig();
-		$lang = $this->getConfig()->get("Language", Language::FALLBACK_LANGUAGE);
-		$this->baseLang = new Language($lang, $this->getFile() . "resources/");
+		$this->baseLang = new Language(($this->getConfig()->get("Language", Language::FALLBACK_LANGUAGE)), $this->getFile() . "resources/");
 		$this->dataProvider = match ($this->getConfig()->get("provider", "sqlite")) {
 			"mysql" => new MySQLProvider(),
 			default => new SQLiteDataProvider()
 		};
+		$this->getLogger()->info($this->dataProvider->getName() . " activated!");
 	}
 
 	public function onEnable() : void {

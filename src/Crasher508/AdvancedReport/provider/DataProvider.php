@@ -39,4 +39,9 @@ abstract class DataProvider
 	 * @return void
 	 */
 	public abstract function close() : void;
+
+	/**
+	 * @return string
+	 */
+	public abstract function getName() : string;
 }

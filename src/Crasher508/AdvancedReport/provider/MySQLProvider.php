@@ -129,4 +129,8 @@ class MySQLProvider extends DataProvider
 		if ($this->db->close())
 			Main::getInstance()->getLogger()->debug("MySQL database closed!");
 	}
+
+	public function getName() : string {
+		return "MySQL";
+	}
 }

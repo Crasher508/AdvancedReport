@@ -100,4 +100,8 @@ class SQLiteDataProvider extends DataProvider
 		$this->db->close();
 		Main::getInstance()->getLogger()->debug("SQLite database closed!");
 	}
+
+	public function getName() : string {
+		return "SQLite3";
+	}
 }
