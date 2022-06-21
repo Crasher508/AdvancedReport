@@ -5,6 +5,7 @@ namespace Crasher508\AdvancedReport\forms;
 use Crasher508\AdvancedReport\Main;
 use Crasher508\AdvancedReport\Report;
 use DateTime;
+use DateTimeZone;
 use dktapps\pmforms\CustomForm;
 use dktapps\pmforms\CustomFormResponse;
 use dktapps\pmforms\element\Dropdown;
@@ -33,7 +34,7 @@ class SimpleReportForm extends CustomForm {
 				$info = $response->getString("problem");
 				if ($info !== "") {
 					if (Main::getInstance()->getProvider()->getReport($player->getName(), $reportet) === null) {
-						$time = new DateTime("now", new \DateTimeZone("Europe/Berlin"));
+						$time = new DateTime("now", new DateTimeZone("Europe/Berlin"));
 						$time = $time->format("d.m.Y H:i");
 						$report = new Report($reason, $player->getName(), $reportet, $info, $time);
 						Main::getInstance()->getProvider()->addReport($report);
