@@ -8,6 +8,7 @@ use Crasher508\AdvancedReport\provider\DataProvider;
 use Crasher508\AdvancedReport\provider\MySQLProvider;
 use Crasher508\AdvancedReport\provider\SQLiteDataProvider;
 use Crasher508\AdvancedReport\commands\ReportCommand;
+use Exception;
 use pocketmine\lang\Language;
 use pocketmine\plugin\PluginBase;
 
@@ -35,11 +36,16 @@ class Main extends PluginBase
 		self::$instance = $this;
 		$this->reloadConfig();
 		$this->baseLang = new Language(($this->getConfig()->get("Language", Language::FALLBACK_LANGUAGE)), $this->getFile() . "resources/");
-		$this->dataProvider = match ($this->getConfig()->get("provider", "sqlite")) {
-			"mysql" => new MySQLProvider(),
-			default => new SQLiteDataProvider()
-		};
-		$this->getLogger()->info($this->dataProvider->getName() . " activated!");
+		try {
+			$this->dataProvider = match ($this->getConfig()->get("provider", "sqlite")) {
+				"mysql" => new MySQLProvider(),
+				default => new SQLiteDataProvider()
+			};
+		} catch(Exception $exception) {
+			$this->getLogger()->error($exception->getMessage() . ", using SQLite3 provider");
+			$this->dataProvider = new SQLiteDataProvider();
+		}
+		$this->getLogger()->info($this->dataProvider->getName() . " provider activated!");
 	}
 
 	public function onEnable() : void {

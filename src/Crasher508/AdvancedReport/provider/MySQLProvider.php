@@ -4,6 +4,7 @@ namespace Crasher508\AdvancedReport\provider;
 
 use Crasher508\AdvancedReport\Main;
 use Crasher508\AdvancedReport\Report;
+use Exception;
 use mysqli;
 use RuntimeException;
 
@@ -15,6 +16,8 @@ class MySQLProvider extends DataProvider
 
 	/**
 	 * SQLiteDataProvider constructor.
+	 *
+	 * @throws Exception
 	 */
 	public function __construct() {
 		$mysqlData = Main::getInstance()->getConfig()->get("mysql", []);
